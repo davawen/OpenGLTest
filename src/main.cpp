@@ -4,6 +4,8 @@
 
 void render(void);
 
+float f = 0.;
+
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
@@ -15,22 +17,26 @@ int main(int argc, char **argv)
 	
 	glutDisplayFunc(render);
 	
-	
-	
 	glutMainLoop();
 	return 0;
 }
 void render(void)
 {
-	glViewport(0, 0, 800, 800);
-	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glBegin(GL_TRIANGLE_STRIP);
 	
-	glColor3f(1.f, 1.f, 1.f);
-	glVertex3f(-0.5f, 0.f, 0.f);
-	glVertex3f(0.5f, 0.5f, 0.f);
-	glVertex3f(0.f, 0.5f, 0.f);
+	f -= 1.f;
+	
+	glBegin(GL_POLYGON);
+	
+	glVertex3f(0.5f + f , 0.5f, 0.5f);
+	glVertex3f(0.5f , -0.5f, 0.5f);
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+	glVertex3f(-0.5f, 0.5f, 0.5f);
+
+	glVertex3f(0.5f , 0.5f, -0.5f);
+	glVertex3f(0.5f , -0.5f, -0.5f);
+	glVertex3f(-0.5f, -0.5f, -0.5f);
+	glVertex3f(-0.5f, 0.5f, -0.5f);
 	
 	glEnd();
 	
