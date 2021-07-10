@@ -6,7 +6,7 @@ EXEC_NAME = main
 
 SRC_FILES = main.cpp
 
-LIBS = GL GLU glut
+LIBS = GL GLEW glfw 
 
 LIB_PATH = /usr/local/lib64 /usr/lib64
 INCLUDE_PATH = ./include /usr/local/include/
