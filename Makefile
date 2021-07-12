@@ -4,7 +4,7 @@ CXXLINKFLAGS = #-pthread
 
 EXEC_NAME = main
 
-SRC_FILES = main.cpp
+SRC_FILES = main.cpp shader.cpp readFile.cpp vertexBuffer.cpp indexBuffer.cpp vertexArray.cpp
 
 LIBS = GL GLEW glfw 
 
