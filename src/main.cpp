@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <vector>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -13,11 +14,6 @@ int main(int argc, char **argv)
 	#pragma region Initialize Libs
 	if(!glfwInit())
 		return -1;
-	
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	
 	/* Create a windowed mode window and its OpenGL context */
 	GLFWwindow *window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
@@ -38,23 +34,33 @@ int main(int argc, char **argv)
 	#pragma endregion
 	
 	
-	GLfloat vertices[] =
+	GLfloat vertices[147];
+	
+	for(int i = 0; i < 147; i += 3)
 	{
-		-0.5f    , -0.5f * float(sqrt(3))    / 3, 0.0f, // Lower left corner
-		0.5f     , -0.5f * float(sqrt(3))    / 3, 0.0f, // Lower right corner
-		0.0f     , 0.5f * float(sqrt(3)) * 2 / 3, 0.0f, // Upper corner
-		-0.5f                                / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner left
-		0.5f                                 / 2 , 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner right
-		0.0f     , -0.5f * float(sqrt(3))    / 3, 0.0f // Inner down
-	};
-
+		int index = i/3;
+		
+		vertices[i  ] = (index % 7) / 7.f - .5f;
+		vertices[i+1] = (index / 7) / 7.f - .5f;
+		vertices[i+2] = 0.f;
+	}
+	
+	
 	// Indices for vertices order
-	GLuint indices[] =
+	GLuint indices[294];
+	
+	for(int i = 0; i < 294; i += 6)
 	{
-		0, 3, 5, // Lower left triangle
-		3, 2, 4, // Lower right triangle
-		5, 4, 1 // Upper triangle
-	};
+		int index = i/3;
+		
+		indices[i  ] = i;
+		indices[i+1] = i+1;
+		indices[i+2] = i+7;
+		
+		indices[i+3] = i+1;
+		indices[i+4] = i+7;
+		indices[i+5] = i+8;
+	}
 	
 	glViewport(0, 0, 800, 800);
 	
@@ -79,9 +85,10 @@ int main(int argc, char **argv)
 		glClear(GL_COLOR_BUFFER_BIT);
 		
 		shaderProgram.activate();
+		 
 		
 		VAO.bind();
-		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_POINTS, 3, GL_UNSIGNED_INT, 0);
 		
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);
