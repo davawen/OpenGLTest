@@ -1,6 +1,7 @@
-#ifndef __SHADER_H__
-#define __SHADER_H__
+#pragma once
 
+#include <iostream>
+#include <string.h>
 #include <GL/glew.h>
 
 #include "readFile.hpp"
@@ -22,6 +23,5 @@ class Shader
 		
 		void activate();
 		void destroy();
+		void compileErrors(unsigned int shader, const char *type);
 };
-
-#endif /* __SHADER_H__ */

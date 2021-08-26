@@ -1,5 +1,4 @@
-#ifndef __VERTEX_ARRAY_H__
-#define __VERTEX_ARRAY_H__
+#pragma once
 
 #include <GL/glew.h>
 
@@ -17,5 +16,3 @@ class VertexArray
 		void unbind();
 		void destroy();
 };
-
-#endif

@@ -1,4 +1,4 @@
-#include "Rendering/indexBuffer.hpp"
+#include "indexBuffer.hpp"
 
 IndexBuffer::IndexBuffer(GLuint *indices, GLsizeiptr size)
 {
